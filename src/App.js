@@ -1,23 +1,34 @@
-import React,{useState} from 'react'
-import SingleQuestion from './Question'
-import List from './List'
+import React, { useState } from "react";
+import list from "./List";
+import Categories from "./Categories";
+import Menu from "./Menu";
+
+const categoriesList =['all',...new Set(list.map((itm)=> itm.category))]
+console.log(categoriesList)
 const App = () => {
-  const [questions, setquestions] = useState(List)
-  console.log(questions)
+  const [menuItems, setmenuItems] = useState(list);
+  const [categories, setCategories] = useState(categoriesList);
+
+  const filterItem = (category) =>{
+   if(category ==='all'){
+    setmenuItems(list)
+    return;
+   }
+    let newItem = list.filter((item)=> item.category ===category)
+    setmenuItems(newItem)
+  }
   return (
     <main>
-    <div className='container'>
-      <h3>questions and answers about login</h3>
-      <section className='info'>
-        {questions.map((question) => {
-          return (
-            <SingleQuestion key={question.id} {...question}></SingleQuestion>
-          );
-        })}
+      <section className="menu section">
+        <div className="title">
+          <h2>our menu</h2>
+          <div className="underline"></div>
+        </div>
+        <Categories categoriesList={categories} filterItem={filterItem}/>
+        <Menu items={menuItems} />
       </section>
-    </div>
-  </main>
-  )
-}
+    </main>
+  );
+};
 
-export default App
+export default App;
