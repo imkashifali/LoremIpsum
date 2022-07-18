@@ -16,11 +16,6 @@ code {
 Variables
 ===============
 */
-/*
-=============== 
-Variables
-===============
-*/
 
 :root {
   /* dark shades of primary color*/
@@ -151,96 +146,120 @@ p {
     width: 95vw;
   }
 }
-.btn {
-  background: var(--clr-primary-5);
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius);
-  text-transform: capitalize;
-  color: var(--clr-white);
-  letter-spacing: var(--spacing);
-  border-color: transparent;
-  cursor: pointer;
-  margin-top: 2rem;
-  font-size: 1.2rem;
-}
+
 /*
 =============== 
-Tours
+Reviews
 ===============
 */
 main {
-  width: 90vw;
-  max-width: var(--fixed-width);
-  margin: 5rem auto;
-}
-.loading {
-  text-align: center;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
 }
 .title {
   text-align: center;
   margin-bottom: 4rem;
 }
 .underline {
-  width: 6rem;
   height: 0.25rem;
+  width: 5rem;
   background: var(--clr-primary-5);
   margin-left: auto;
   margin-right: auto;
 }
-
-.single-tour {
+.container {
+  width: 80vw;
+  max-width: var(--fixed-width);
+}
+.review {
   background: var(--clr-white);
+  padding: 1.5rem 2rem;
   border-radius: var(--radius);
-  margin: 2rem 0;
   box-shadow: var(--light-shadow);
   transition: var(--transition);
+  text-align: center;
 }
-.single-tour:hover {
+.review:hover {
   box-shadow: var(--dark-shadow);
 }
-.single-tour img {
-  width: 100%;
-  height: 20rem;
-  object-fit: cover;
-  border-top-right-radius: var(--radius);
-  border-top-left-radius: var(--radius);
-}
-.tour-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.img-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
   margin-bottom: 1.5rem;
 }
-.tour-info h4 {
-  margin-bottom: 0;
+.person-img {
+  width: 100%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
 }
-.single-tour button {
+.quote-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transform: translateY(25%);
+  background: var(--clr-primary-5);
+  color: var(--clr-white);
+}
+.img-container::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--clr-primary-5);
+  position: absolute;
+  top: -0.25rem;
+  right: -0.5rem;
+  border-radius: 50%;
+}
+.author {
+  margin-bottom: 0.25rem;
+}
+.job {
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: var(--clr-primary-5);
+  font-size: 0.85rem;
+}
+.info {
+  margin-bottom: 0.75rem;
+}
+.prev-btn,
+.next-btn {
+  color: var(--clr-primary-7);
+  font-size: 1.25rem;
   background: transparent;
   border-color: transparent;
-  text-transform: capitalize;
-  color: var(--clr-primary-5);
-  font-size: 1rem;
+  margin: 0 0.5rem;
+  transition: var(--transition);
   cursor: pointer;
-  padding-left: 0.25rem;
 }
-.tour-price {
+.prev-btn:hover,
+.next-btn:hover {
   color: var(--clr-primary-5);
+}
+.random-btn {
+  margin-top: 0.5rem;
   background: var(--clr-primary-10);
+  color: var(--clr-primary-5);
   padding: 0.25rem 0.5rem;
+  text-transform: capitalize;
   border-radius: var(--radius);
+  transition: var(--transition);
+  border-color: transparent;
+  cursor: pointer;
 }
-.single-tour footer {
-  padding: 1.5rem 2rem;
-}
-.single-tour .delete-btn {
-  display: block;
-  width: 200px;
-  margin: 1rem auto 0 auto;
-  color: var(--clr-red-dark);
-  letter-spacing: var(--spacing);
-  background: transparent;
-  border: 1px solid var(--clr-red-dark);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius);
+.random-btn:hover {
+  background: var(--clr-primary-5);
+  color: var(--clr-primary-1);
 }
