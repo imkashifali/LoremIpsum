@@ -1,34 +1,71 @@
-import React, { useState } from "react";
-import list from "./List";
-import Categories from "./Categories";
-import Menu from "./Menu";
+import React, { useState, useEffect } from 'react'
+import { FaAngleDoubleRight } from 'react-icons/fa'
+// ATTENTION!!!!!!!!!!
+// I SWITCHED TO PERMANENT DOMAIN
+const url = 'https://course-api.com/react-tabs-project'
+function App() {
+  const [loading, setLoading] = useState(true)
+  const [jobs, setJobs] = useState([])
+  const [value, setValue] = useState(0)
 
-const categoriesList =['all',...new Set(list.map((itm)=> itm.category))]
-console.log(categoriesList)
-const App = () => {
-  const [menuItems, setmenuItems] = useState(list);
-  const [categories, setCategories] = useState(categoriesList);
-
-  const filterItem = (category) =>{
-   if(category ==='all'){
-    setmenuItems(list)
-    return;
-   }
-    let newItem = list.filter((item)=> item.category ===category)
-    setmenuItems(newItem)
+  const fetchJobs = async () => {
+    const reponse = await fetch(url)
+    const newJobs = await reponse.json()
+    setJobs(newJobs)
+    setLoading(false)
   }
-  return (
-    <main>
-      <section className="menu section">
-        <div className="title">
-          <h2>our menu</h2>
-          <div className="underline"></div>
-        </div>
-        <Categories categoriesList={categories} filterItem={filterItem}/>
-        <Menu items={menuItems} />
+  useEffect(() => {
+    fetchJobs()
+  }, [])
+  if (loading) {
+    return (
+      <section className="section loading">
+        <h1>Loading...</h1>
       </section>
-    </main>
-  );
-};
+    )
+  }
+  const { company, dates, duties, title } = jobs[value]
+  return (
+    <section className="section">
+      <div className="title">
+        <h2>experience</h2>
+        <div className="underline"></div>
+      </div>
+      <div className="jobs-center">
+        {/* btn container */}
+        <div className="btn-container">
+          {jobs.map((item, index) => {
+            return (
+              <button
+                key={item.id}
+                onClick={() => setValue(index)}
+                className={`job-btn ${index === value && 'active-btn'}`}
+              >
+                {item.company}
+              </button>
+            )
+          })}
+        </div>
+        {/* job info */}
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
+          {duties.map((duty, index) => {
+            return (
+              <div key={index} className="job-desc">
+                <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                <p>{duty}</p>
+              </div>
+            )
+          })}
+        </article>
+      </div>
+      <button type="button" className="btn">
+        more info
+      </button>
+    </section>
+  )
+}
 
-export default App;
+export default App
